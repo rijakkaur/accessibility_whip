@@ -1,0 +1,182 @@
+# Access Confidence — App Build Brief
+
+Build a mobile-first web app called “Access Confidence” — an accessibility navigation and verification app for people with disabilities.
+
+## Problem
+Disabled people often cannot reliably find whether a route, transit option, building, clinic, workplace, or public venue is actually accessible. Information about steps, lifts, ramps, accessible toilets, door widths, assistance, crowding, noise, and transport accessibility is often missing, outdated, or inaccessible. This causes people to avoid travel, arrive unable to enter, miss appointments, or lose independence.
+
+## Target users
+- Wheelchair and mobility-aid users
+- Blind and low-vision users
+- Deaf and hard-of-hearing users
+- Neurodivergent users
+- People with chronic illness, fatigue, or pain
+- Caregivers, family members, disability organizations, and venue staff
+
+## Core value proposition
+Help users confidently answer: “Can I get there, get in, use the facilities, and travel safely today?”
+
+## MVP features
+
+### 1. Accessible place search
+- Search for places by name, category, or address.
+- Categories: hospitals, clinics, pharmacies, schools, offices, restaurants, cafes, public toilets, metro stations, bus stops, parks, banks, government offices.
+- Each place has an accessibility profile.
+
+### 2. Place accessibility profile
+For every place, show:
+- Step-free entrance: yes / no / partial
+- Ramp availability and approximate slope
+- Lift/elevator availability and live status
+- Door width estimate
+- Accessible toilet availability and condition
+- Parking and drop-off access
+- Seating availability
+- Lighting level
+- Noise level
+- Crowding level
+- Quiet room or low-sensory space
+- Braille signage
+- Hearing loop
+- Sign-language support
+- Staff assistance availability
+- Wheelchair-accessible counter or service desk
+- Photos submitted by users
+- Last verified date and verification source
+
+### 3. Accessible route planner
+- Let users enter start and destination.
+- Provide walking, public transport, and mixed-route options.
+- Allow accessibility preferences:
+  - Avoid stairs
+  - Step-free only
+  - Avoid steep slopes
+  - Prefer lifts working
+  - Prefer short walking distance
+  - Need frequent rest points
+  - Prefer low-crowding routes
+  - Prefer well-lit routes
+  - Prefer quiet routes
+- Show warnings such as: “This route includes 3 steps,” “Lift reported out of service,” “No accessible toilet at destination,” or “Steep ramp ahead.”
+- If no fully accessible route is found, show the closest partial options with clear warnings.
+
+### 4. Live accessibility status
+- Users can report:
+  - Lift broken
+  - Ramp blocked
+  - Accessible toilet unavailable or dirty
+  - Entrance blocked
+  - No staff assistance
+  - Excessive crowding
+  - Loud environment
+  - Temporary construction or closure
+- Reports include optional photo, timestamp, and short note.
+- Show status as: Verified recently, Reported recently, Unknown, or Officially confirmed.
+- Show “last updated” time clearly.
+
+### 5. Community verification
+- Users can confirm or correct accessibility information.
+- Add a simple trust system:
+  - New reports are marked “community reported”
+  - Multiple confirmations increase confidence
+  - Venue owners or official partners can mark data as “verified”
+- Prevent abuse with rate limits, photo evidence, and moderation flags.
+
+### 6. Personal accessibility profile
+Let users save preferences such as:
+- Mobility aid used
+- Needs step-free access
+- Needs lifts
+- Needs low-sensory environments
+- Needs frequent seating
+- Needs screen-reader-friendly interface
+- Preferred language
+- Needs large text or high contrast
+- Needs visual alerts instead of audio
+- Needs captions
+
+The app should use these preferences to personalize route warnings and place recommendations.
+
+### 7. Emergency and assistance mode
+- One-tap screen to request assistance from venue staff where supported.
+- Show a clear card with:
+  - User’s location
+  - Destination
+  - Accessibility need
+  - Preferred communication method
+- Include a “report inaccessible route or venue” button.
+
+## Accessibility requirements — mandatory
+- Full WCAG 2.2 AA compliance.
+- Screen-reader compatible on iOS and Android.
+- Voice input and voice output support.
+- High-contrast mode.
+- Large-text mode.
+- Simple, predictable navigation.
+- Large touch targets.
+- No reliance on color alone to convey information.
+- Captions for all video content.
+- Visual alerts for users who cannot rely on audio.
+- Keyboard and switch-access support.
+- Works on low-end Android phones.
+- Low-data mode and offline access to saved places and routes.
+- Support English and Hindi at launch, with an architecture ready for more Indian regional languages.
+
+## UI direction
+- Clean, calm, high-contrast interface.
+- Large readable typography.
+- Clear icons paired with text labels.
+- Simple bottom navigation: Search, Route, Report, Profile, Saved.
+- Avoid clutter and complex menus.
+- Use plain language.
+- Show accessibility status with icons, labels, and color—not color alone.
+
+## Data model
+Create these entities:
+- User: id, name, accessibility preferences, saved places, reports
+- Place: id, name, category, address, coordinates, accessibility attributes, photos, verification status
+- AccessibilityAttribute: attribute name, value, confidence, source, last updated
+- Route: origin, destination, steps, accessibility warnings, estimated duration, transport modes
+- Report: user id, place id, attribute affected, status, note, photo, timestamp
+- Verification: user id, place id, attribute, confirmation type, timestamp
+
+## Example user flows
+
+### Flow 1: Find an accessible clinic
+1. User searches “clinic near me.”
+2. App shows nearby clinics with accessibility badges.
+3. User filters by “step-free entrance,” “accessible toilet,” and “lift available.”
+4. User opens a clinic profile and sees photos, entrance details, toilet status, and recent reports.
+5. User saves the clinic.
+
+### Flow 2: Plan an accessible journey
+1. User enters home and hospital.
+2. User selects “step-free only” and “avoid steep slopes.”
+3. App shows a route with lift status and warnings.
+4. App warns: “Metro lift at Station B reported out of service 25 minutes ago.”
+5. User chooses an alternative route or reports updated status.
+
+### Flow 3: Report a barrier
+1. User arrives at a venue and finds the ramp blocked.
+2. User opens Report.
+3. User selects “Ramp blocked,” adds a photo, and submits.
+4. App updates the venue’s accessibility status and warns other users.
+
+## Launch scope
+Start with one city and prioritize:
+- Hospitals and clinics
+- Metro stations and major bus stops
+- Government offices
+- Large public venues
+- Accessible public toilets
+
+## Success metrics
+- Number of places with verified accessibility data
+- Percentage of searches resulting in a usable accessible route
+- Number of live accessibility reports
+- Report accuracy and confirmation rate
+- Retention of disabled users
+- Reduction in failed or abandoned trips reported by users
+
+## Important design principle
+Do not build a generic maps app with accessibility labels added later. Accessibility must be the core product. Co-design the flows with disabled users, make every feature usable without vision, hearing, fine motor control, or high bandwidth, and clearly distinguish verified information from community-reported information.
